@@ -1,28 +1,51 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 function FormHandle() {
     let [user, setUser] = useState({});
     let [list, setList] = useState([]);
+    let [index, setIndex] = useState(-1);
+
+    useEffect(() => {
+        let oldList = JSON.parse(localStorage.getItem('user')) || [];
+        setList(oldList);
+    }, [])
 
     let handleChange = (e) => {
         let { name, value } = e.target;
         let newUser = { ...user, [name]: value }
-        console.log(newUser);
+        // console.log(newUser);
         setUser(newUser);
 
     }
 
     let handleSubmit = (e) => {
         e.preventDefault();
-        let newList = [...list, user];
+        let newList = [];
+
+        if (index != -1) {
+            list[index] = user;
+            newList = [...list]
+        } else {
+            newList = [...list, user];
+        }
+
         setList(newList);
-        console.log(newList);
+        localStorage.setItem('user', JSON.stringify(newList));
         setUser({});
+        setIndex(-1)
     }
 
     let handleDelete = (pos) => {
-        let newList = list.splice(pos, 1);
+        list.splice(pos, 1)
+        let newList = [...list];
+        localStorage.setItem('user', JSON.stringify(newList));
         setList(newList);
+    }
+
+    let handleEdit = (pos) => {
+        let editUser = list[pos];
+        setUser(editUser);
+        setIndex(pos);
     }
 
     return (
@@ -43,7 +66,7 @@ function FormHandle() {
                         </tr>
                         <tr>
                             <td></td>
-                            <td><input type="submit" value="Add Data" /></td>
+                            <td><input type="submit" value={index != -1 ? "Update" : "Add Data"} /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -67,6 +90,7 @@ function FormHandle() {
                                 <td>{v.email}</td>
                                 <td>
                                     <button onClick={() => handleDelete(i)}>Delete</button>
+                                    <button onClick={() => handleEdit(i)}>Edit</button>
                                 </td>
                             </tr>
                         ))
