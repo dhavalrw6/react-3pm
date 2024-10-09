@@ -1,0 +1,28 @@
+{
+  "user": [
+    {
+      "id": "6eb8",
+      "username": "xytesu",
+      "password": "Sit asperiores facer"
+    },
+    {
+      "id": "7232",
+      "username": "nifafufox",
+      "password": "Adipisicing sit con"
+    },
+    {
+      "id": "637d",
+      "username": "bodikabaw",
+      "password": "Voluptate molestias "
+    },
+    {
+      "id": "2f3a",
+      "username": "pyrykib",
+      "password": "Amet magnam quidem "
+    }
+  ],
+  "admin": [],
+  "profile": {
+    "name": "typicode"
+  }
+}

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
-function AddRecode() {
+function Pagination() {
     const [data, setData] = useState({});
     const [dataList, setDataList] = useState([]);
-    const [search, setSearch] = useState('');
+    // const [search, setSearch] = useState('');
     const [symbol, setSymbol] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 4;
 
     useEffect(() => {
         let oldData = JSON.parse(localStorage.getItem('data')) || []
@@ -25,11 +27,6 @@ function AddRecode() {
         setDataList(newList);
         localStorage.setItem('data', JSON.stringify(newList));
         setData({})
-    }
-
-    let handleSearch = (e) => {
-        console.log(e.target.value);
-        setSearch(e.target.value)
     }
 
     let sortBy = (type) => {
@@ -63,6 +60,18 @@ function AddRecode() {
         }
         setDataList([...newList]);
     }
+
+    let changePage = (page) => {
+        setCurrentPage(page);
+    }
+
+    // Pagination Logic
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentData = dataList.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPage = Math.ceil(dataList.length / itemsPerPage);
+    console.log(currentData);
 
     return (
         <>
@@ -109,9 +118,6 @@ function AddRecode() {
             <table align='center' border={1} width={400}>
                 <caption>
                     <h2>User Recode</h2>
-                    <div style={{ textAlign: "center", marginBottom: "10px" }}>
-                        <input type="text" onChange={handleSearch} />
-                    </div>
                 </caption>
                 <thead>
                     <tr>
@@ -126,30 +132,40 @@ function AddRecode() {
                 <tbody>
 
                     {
-                        dataList.filter((val, idx) => {
-                            if (search == '') {
-                                return val
-                            } else {
-                                if (val.username.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
-                                    return val
-                                }
-                                else if (val.email.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
-                                    return val
-                                }
-                            }
-                        }).map((val, idx) => (
+                        currentData.map((val, idx) => (
                             <tr key={idx}>
                                 <td>{val.username}</td>
                                 <td>{val.email}</td>
                             </tr>
                         ))
                     }
+                    <tr>
+                        <td colSpan={2}>
 
+                            {
+                                currentPage > 1 &&
+                                <button onClick={() => setCurrentPage(currentPage - 1)}>prev</button>
+                            }
+
+                            {
+                                [...Array(totalPage)].map((_, index) => {
+                                    return (
+                                        <button onClick={() => changePage(index + 1)}>{index + 1}</button>
+                                    )
+                                })
+                            }
+                            {
+                                currentPage < totalPage &&
+                                < button onClick={() => setCurrentPage(currentPage + 1)}>next</button>
+                            }
+
+                        </td>
+                    </tr>
                 </tbody>
-            </table>
+            </table >
 
         </>
     )
 }
 
-export default AddRecode
+export default Pagination

@@ -1,10 +1,12 @@
 import React from 'react'
-import AddRecode from './components/AddRecode'
+import Pagination from './components/Pagination'
+// import AddRecode from './components/AddRecode'
 
 function App() {
   return (
     <>
-      <AddRecode />
+      {/* <AddRecode /> */}
+      <Pagination />
     </>
   )
 }

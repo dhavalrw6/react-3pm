@@ -1,0 +1,41 @@
+{
+  "products": [
+    {
+      "id": "3703",
+      "title": "Dolorem aliquam iure",
+      "price": "479",
+      "url": "https://m.media-amazon.com/images/I/81Z1scL6HvL._SX679_.jpg"
+    },
+    {
+      "id": "9703",
+      "title": "Quasi dolores enim s",
+      "price": "499",
+      "url": "https://m.media-amazon.com/images/I/81mw0VeB4AL._SX679_.jpg"
+    },
+    {
+      "id": "48b1",
+      "url": "https://m.media-amazon.com/images/I/71gm8v4uPBL._SX679_.jpg",
+      "title": "iphone"
+    },
+    {
+      "id": "5d4c",
+      "title": "Similique ea do repe",
+      "price": "794",
+      "url": "https://m.media-amazon.com/images/I/61-r9zOKBCL._SX679_.jpg"
+    },
+    {
+      "id": "751c",
+      "url": "https://m.media-amazon.com/images/I/31tyUh1todL._SY445_SX342_QL70_FMwebp_.jpg",
+      "title": "iphone 13",
+      "price": "43999"
+    }
+  ],
+  "cart": [
+    {
+      "id": "9703",
+      "title": "Quasi dolores enim s",
+      "price": "499",
+      "url": "https://m.media-amazon.com/images/I/81mw0VeB4AL._SX679_.jpg"
+    }
+  ]
+}
